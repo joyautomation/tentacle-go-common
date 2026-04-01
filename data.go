@@ -7,16 +7,31 @@ type DeadBandConfig struct {
 	MaxTime int64   `json:"maxTime,omitempty"` // ms — force publish if exceeded, 0 = disabled
 }
 
+// UdtMemberDefinition describes a single field in a UDT template.
+type UdtMemberDefinition struct {
+	Name        string `json:"name"`
+	Datatype    string `json:"datatype"`              // "number", "boolean", "string"
+	TemplateRef string `json:"templateRef,omitempty"` // nested UDT reference
+}
+
+// UdtTemplateDefinition is a Sparkplug B UDT template definition.
+type UdtTemplateDefinition struct {
+	Name    string                `json:"name"`
+	Version string                `json:"version,omitempty"`
+	Members []UdtMemberDefinition `json:"members"`
+}
+
 // PlcDataMessage is published when a monitored variable changes value.
 // Subject: {moduleId}.data.{deviceId}.{sanitizedVariableId}
 type PlcDataMessage struct {
-	ModuleID    string          `json:"moduleId"`
-	DeviceID    string          `json:"deviceId"`
-	VariableID  string          `json:"variableId"`
-	Value       interface{}     `json:"value"`
-	Timestamp   int64           `json:"timestamp"`
-	Datatype    string          `json:"datatype"`
-	Description string          `json:"description,omitempty"`
-	Deadband    *DeadBandConfig `json:"deadband,omitempty"`
-	DisableRBE  bool            `json:"disableRBE,omitempty"`
+	ModuleID    string                 `json:"moduleId"`
+	DeviceID    string                 `json:"deviceId"`
+	VariableID  string                 `json:"variableId"`
+	Value       interface{}            `json:"value"`
+	Timestamp   int64                  `json:"timestamp"`
+	Datatype    string                 `json:"datatype"`
+	Description string                 `json:"description,omitempty"`
+	Deadband    *DeadBandConfig        `json:"deadband,omitempty"`
+	DisableRBE  bool                   `json:"disableRBE,omitempty"`
+	UdtTemplate *UdtTemplateDefinition `json:"udtTemplate,omitempty"`
 }
