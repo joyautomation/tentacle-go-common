@@ -24,14 +24,15 @@ type UdtTemplateDefinition struct {
 // PlcDataMessage is published when a monitored variable changes value.
 // Subject: {moduleId}.data.{deviceId}.{sanitizedVariableId}
 type PlcDataMessage struct {
-	ModuleID    string                 `json:"moduleId"`
-	DeviceID    string                 `json:"deviceId"`
-	VariableID  string                 `json:"variableId"`
-	Value       interface{}            `json:"value"`
-	Timestamp   int64                  `json:"timestamp"`
-	Datatype    string                 `json:"datatype"`
-	Description string                 `json:"description,omitempty"`
-	Deadband    *DeadBandConfig        `json:"deadband,omitempty"`
-	DisableRBE  bool                   `json:"disableRBE,omitempty"`
-	UdtTemplate *UdtTemplateDefinition `json:"udtTemplate,omitempty"`
+	ModuleID         string                       `json:"moduleId"`
+	DeviceID         string                       `json:"deviceId"`
+	VariableID       string                       `json:"variableId"`
+	Value            interface{}                  `json:"value"`
+	Timestamp        int64                        `json:"timestamp"`
+	Datatype         string                       `json:"datatype"`
+	Description      string                       `json:"description,omitempty"`
+	Deadband         *DeadBandConfig              `json:"deadband,omitempty"`
+	DisableRBE       bool                         `json:"disableRBE,omitempty"`
+	UdtTemplate      *UdtTemplateDefinition       `json:"udtTemplate,omitempty"`
+	MemberDeadbands  map[string]DeadBandConfig    `json:"memberDeadbands,omitempty"`
 }

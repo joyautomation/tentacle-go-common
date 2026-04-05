@@ -74,11 +74,20 @@ type ServiceStatusKV struct {
 
 // ModuleRegistryInfo describes a module from the orchestrator's registry.
 type ModuleRegistryInfo struct {
-	ModuleID    string `json:"moduleId"`
-	Repo        string `json:"repo"`
+	ModuleID       string              `json:"moduleId"`
+	Repo           string              `json:"repo"`
+	Description    string              `json:"description"`
+	Category       string              `json:"category"`
+	Runtime        string              `json:"runtime"`
+	RequiredConfig []ModuleConfigField `json:"requiredConfig,omitempty"`
+}
+
+// ModuleConfigField describes a configuration field for a module.
+type ModuleConfigField struct {
+	EnvVar      string `json:"envVar"`
 	Description string `json:"description"`
-	Category    string `json:"category"`
-	Runtime     string `json:"runtime"`
+	Default     string `json:"default,omitempty"`
+	Required    bool   `json:"required"`
 }
 
 // ModuleVersionInfo holds version info for a specific module.
